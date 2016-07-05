@@ -17,7 +17,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-4 text-center">
-          <button type="button" class="btn" onclick="updateTwitts()">Refresh Twitts</button>
+          <button type="button" class="btn">Refresh Twitts</button>
         </div>
         <div id="tBody" class="col-sm-8 text-justify">
           Example Row 2
@@ -25,22 +25,26 @@
       </div>
     </div>
     <script>
-      var updateTwitts = function(){
         $(document).ready(function(){
-          var $body = $("#tBody");
-          $body.html('');
+          var updateTwitts = function () {
+            var $body = $("#tBody");
+            $body.html('');
 
-          var index = streams.home.length - 1;
-          while(index >= 0){
-            var tweet = streams.home[index];
-            var $tweet = $('<div class="row"></div>');
-            $tweet.html('@' + tweet.user + ': ' + tweet.message + ' <strong class="text-right">created at: ' + tweet.created_at + '</strong>') ;
-            $tweet.appendTo($body);
-            index -= 1;
+            var index = streams.home.length - 1;
+            while(index >= 0){
+              var tweet = streams.home[index];
+              var $tweet = $('<div class="row"></div>');
+              $tweet.html('@' + '<span id="'+tweet.user+'">' +tweet.user + '</span>' + ': ' + tweet.message + ' <strong class="text-right">created at: ' + tweet.created_at + '</strong>') ;
+              $tweet.appendTo($body);
+              index -= 1;
+            }
           }
+        
+          updateTwitts()
+          $("button").click(function(){updateTwitts()})
         });
-      }
-      updateTwitts();    
+  
+
 
     </script>
   </body>
