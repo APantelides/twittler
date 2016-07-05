@@ -3,24 +3,37 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
+    <div class="jumbotron text-center">Welcome to Twittler!</div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 text-right">
+          <button type="button" class="btn" onclick="updateTwitts()">Refresh Twitts</button>
+        </div>
+        <div id="tBody" class="col-sm-8 text-left">
+          Example Row 2
+        </div>
+      </div>
+    </div>
     <script>
+      var updateTwitts = function(){
+        $(document).ready(function(){
+          var $body = $("#tBody");
+          $body.html('');
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-
-      });
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + " submitted at : " + tweet.created_at);
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+        });
+      }
+      updateTwitts();    
 
     </script>
   </body>
