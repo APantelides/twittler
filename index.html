@@ -33,15 +33,28 @@
             var index = streams.home.length - 1;
             while(index >= 0){
               var tweet = streams.home[index];
-              var $tweet = $('<div class="row"></div>');
+              var $tweet = $('<div class="mainTweets"></div>');
               $tweet.html('@' + '<span id="'+tweet.user+'">' +tweet.user + '</span>' + ': ' + tweet.message + ' <strong class="text-right">created at: ' + tweet.created_at + '</strong>') ;
               $tweet.appendTo($body);
               index -= 1;
             }
+
+            $("span").click(function() {
+              $("#tBody").html('')
+              var userName=streams.users[this.id]
+              $('<div class="userTweet"></div>').html('<h2 class="text-center"> Now Showing: ' + this.id + '\'s timeline!</h2>').appendTo($("#tBody"))
+              for(var i = userName.length - 1; i>=0; i--){
+                $('<div class="userTweet"></div>').html('@' +userName[i].user + ': ' + userName[i].message + ' <strong class="text-right">created at: ' + userName[i].created_at + '</strong>').appendTo($("#tBody"))
+              }
+          
+            })
+
           }
         
           updateTwitts()
-          $("button").click(function(){updateTwitts()})
+          $(".btn").click(function(){updateTwitts()})
+
+          
         });
   
 
